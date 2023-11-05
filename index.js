@@ -118,11 +118,11 @@ app.post('/api/users/:_id/exercises', (req,res) =>
       
       const user = { 
         username: results[0].username,
-         _id: results[0].id, 
-         description: description,
-         duration: duration,
-         date: moment(date).format(dateFormat)
-        };
+        description: description,
+        duration: Number.parseInt(duration),
+        date: moment(date).format(dateFormat),
+        _id: results[0].id
+      };
 
       res.json(user);
     }
