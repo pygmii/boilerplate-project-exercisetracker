@@ -15,6 +15,8 @@ const connection = mysql.createConnection({
   database: 'exercisetracker'
 });
 
+const dateFormat = 'ddd MMM DD YYYY';
+
 app.use(cors())
 
 // for parsing application/json
@@ -119,7 +121,7 @@ app.post('/api/users/:_id/exercises', (req,res) =>
          _id: results[0].id, 
          description: description,
          duration: duration,
-         date: date
+         date: moment(date).format(dateFormat)
         };
 
       res.json(user);
@@ -134,8 +136,6 @@ app.get('/api/users/:_id/logs', (req,res) =>
   const from = req.query.from;
   const to = req.query.to;
   const limit = req.query.limit;
-
-  const format = 'ddd MMM DD YYYY';
   
   let logs = new Array();
 
@@ -166,7 +166,7 @@ app.get('/api/users/:_id/logs', (req,res) =>
         const excercise = { 
           description: element.description,
           duration: element.duration,
-          date : moment(element.date).format(format)
+          date : moment(element.date).format(dateFormat)
         };
         logs.push(excercise) ;
       });
