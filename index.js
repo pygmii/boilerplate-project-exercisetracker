@@ -175,7 +175,7 @@ app.get('/api/users/:_id/logs', (req,res) =>
         username: results[0].username,
         count: logs.length,
         _id: results[0].userid,
-        logs: logs
+        log: logs
       };
 
       res.json(response);
