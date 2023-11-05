@@ -85,7 +85,7 @@ app.post('/api/users/:_id/exercises', (req,res) =>
   const userid = req.params._id;
   const description = req.body.description;
   const duration = req.body.duration;
-  const date = req.body.date.trim().length === 0 ?
+  const date = req.body.date.length === 0 ?
     new Date():
     req.body.date ;
 
@@ -114,7 +114,13 @@ app.post('/api/users/:_id/exercises', (req,res) =>
         throw err;
       }
       
-      const user = { username: results[0].username, _id: results[0].id};
+      const user = { 
+        username: results[0].username,
+         _id: results[0].id, 
+         description: description,
+         duration: duration,
+         date: date
+        };
 
       res.json(user);
     }
