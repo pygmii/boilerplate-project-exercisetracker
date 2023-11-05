@@ -85,7 +85,7 @@ app.post('/api/users/:_id/exercises', (req,res) =>
   const userid = req.params._id;
   const description = req.body.description;
   const duration = req.body.duration;
-  const date = req.body.date.length === 0 ?
+  const date = (typeof req.body.date == 'undefined' || req.body.date.length === 0) ?
     new Date():
     req.body.date ;
 
